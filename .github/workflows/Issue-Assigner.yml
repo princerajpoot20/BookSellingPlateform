@@ -1,0 +1,18 @@
+name: Issue Assignment
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Issue assigner
+      uses: actions/github-script@v5
+      with:
+        script: .github/scripts/issue_assigner.js
+        github-token: ${{ secrets.GH_TOKEN }}
